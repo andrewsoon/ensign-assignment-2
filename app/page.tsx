@@ -1,6 +1,7 @@
 "use client"
 
 import { useProducts } from "@/context/ProductsContext";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -38,7 +39,7 @@ export default function HomePage() {
                   "
                   >
                     <div className="w-full h-48 flex items-center justify-center mb-4">
-                      <img
+                      <Image
                         src={image}
                         alt={title}
                         className="max-h-full max-w-full w-8/12 object-contain"

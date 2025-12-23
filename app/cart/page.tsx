@@ -1,7 +1,8 @@
 "use client"
-import CTA from "@/components/CTA";
+import CTA from "@/components/Button";
 import QuantityControl from "@/components/QuantityControl";
 import { useCart } from "@/context/CartContext";
+import Image from "next/image";
 import React from "react";
 
 export default function Cart() {
@@ -30,7 +31,7 @@ export default function Cart() {
                   key={item.id}
                   className="flex flex-col md:flex-row items-center gap-6 bg-zinc-50 p-4 rounded-lg shadow-sm"
                 >
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
                     className="w-full md:w-32 h-32 object-contain rounded"

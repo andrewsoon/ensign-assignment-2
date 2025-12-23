@@ -1,8 +1,11 @@
 "use client"
 
-import CTA from "@/components/CTA"
+import Button from "@/components/Button"
+import QuantityControl from "@/components/QuantityControl"
 import { useCart } from "@/context/CartContext"
 import { useProducts } from "@/context/ProductsContext"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
 import React, { useCallback } from "react"
 
 interface ProductDetailsProps {
@@ -11,20 +14,39 @@ interface ProductDetailsProps {
 
 export default function ProductDetails({ productId }: ProductDetailsProps) {
   const { products, loading } = useProducts()
-  const { addToCart } = useCart()
+  const { cart, addToCart } = useCart()
+  const [quantity, setQuantity] = React.useState<number>(1)
+  const router = useRouter()
 
   const product = React.useMemo(() => {
     const product = products?.find((p) => p.id === productId)
     return product
   }, [products, productId])
 
-  if (loading) return <div className="text-zinc-600 text-center py-10">Loading product...</div>;
-  if (!product) return <div className="text-zinc-600 text-center py-10">Product not found.</div>;
-
   const handleAddToCart = useCallback(() => {
     if (!product) return
     addToCart(product)
-  }, [product])
+  }, [addToCart, product])
+
+  const handleIncrease = useCallback(() => {
+    setQuantity((prev) => prev + 1)
+  }, [setQuantity])
+
+  const handleDecrease = useCallback(() => {
+    setQuantity((prev) => {
+      if (prev > 1) {
+        prev--
+      }
+      return prev
+    })
+  }, [setQuantity])
+
+  const cartQuantity = React.useMemo(() => {
+    return cart.find((item) => item.id === productId)?.quantity ?? 0
+  }, [cart, productId])
+
+  if (loading) return <div className="text-zinc-600 text-center py-10">Loading product...</div>;
+  if (!product) return <div className="text-zinc-600 text-center py-10">Product not found.</div>;
 
   return (
     <main className="p-5 w-full">
@@ -33,7 +55,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
       p-10
       w-full
       ">
-        <img src={product.image} alt={`${product.title}-image`} className="w-full md:w-7/12 object-contain" />
+        <Image src={product.image} alt={`${product.title}-image`} className="w-full md:w-7/12 object-contain" />
         <div className="flex flex-col gap-6 md:w-5/12">
           <p className="text-5xl">{product.title}</p>
           <p className="text-zinc-600 text-xl">{product.description}</p>
@@ -42,7 +64,13 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
             <p>⭐ {product.rating.rate} / 5</p>
             <p>{product.rating.count} sold!</p>
           </div>
-          <CTA label="Add to cart" onClick={handleAddToCart} />
+          <QuantityControl
+            handleIncrease={handleIncrease}
+            handleDecrease={handleDecrease}
+            quantity={quantity}
+          />
+          <Button label="Add to cart" onClick={handleAddToCart} />
+          <Button label={`View Cart (${cartQuantity})`} variant="outlined" onClick={() => router.push("/cart")} />
         </div>
       </section>
     </main>
