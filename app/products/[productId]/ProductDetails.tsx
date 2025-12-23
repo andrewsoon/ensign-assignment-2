@@ -55,7 +55,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
       p-10
       w-full
       ">
-        <Image src={product.image} alt={`${product.title}-image`} className="w-full md:w-7/12 object-contain" />
+        <Image width={400} height={400} src={product.image} alt={`${product.title}-image`} className="w-full md:w-7/12 object-contain" />
         <div className="flex flex-col gap-6 md:w-5/12">
           <p className="text-5xl">{product.title}</p>
           <p className="text-zinc-600 text-xl">{product.description}</p>

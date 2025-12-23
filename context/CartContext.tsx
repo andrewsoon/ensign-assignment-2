@@ -2,7 +2,9 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Product } from "./ProductsContext";
 
-type CartItem = Product & { quantity: number };
+interface CartItem extends Product {
+  quantity: number;
+};
 
 type CartContextType = {
   cart: CartItem[];

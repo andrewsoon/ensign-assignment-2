@@ -40,6 +40,8 @@ export default function HomePage() {
                   >
                     <div className="w-full h-48 flex items-center justify-center mb-4">
                       <Image
+                        width={400}
+                        height={400}
                         src={image}
                         alt={title}
                         className="max-h-full max-w-full w-8/12 object-contain"

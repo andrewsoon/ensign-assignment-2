@@ -15,7 +15,7 @@ export default function Cart() {
   }
 
   return (
-    <main className="p-10 max-w-6xl w-8/12 mx-auto">
+    <main className="p-10 max-w-6xl md:w-8/12 mx-auto">
       <h1 className="text-4xl font-bold mb-8 text-center">Shopping Cart</h1>
 
       <div className="flex flex-col gap-6">
@@ -32,12 +32,14 @@ export default function Cart() {
                   className="flex flex-col md:flex-row items-center gap-6 bg-zinc-50 p-4 rounded-lg shadow-sm"
                 >
                   <Image
+                    width={100}
+                    height={100}
                     src={item.image}
                     alt={item.title}
                     className="w-full md:w-32 h-32 object-contain rounded"
                   />
 
-                  <div className="flex-1 flex flex-col gap-2">
+                  <div className="w-full flex-1 flex flex-col gap-2">
                     <h2 className="text-lg font-semibold">{item.title}</h2>
                     <p className="text-gray-800 font-medium">${item.price}</p>
 
