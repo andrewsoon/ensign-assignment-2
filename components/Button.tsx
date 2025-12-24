@@ -7,9 +7,10 @@ interface ButtonProps {
   onClick: () => void
   disabled?: boolean
   variant?: ButtonVariant
+  className?: string
 }
 
-function ButtonComponent({ label, onClick, disabled = false, variant = 'contained' }: ButtonProps) {
+function ButtonComponent({ label, onClick, disabled = false, variant = 'contained', className = "" }: ButtonProps) {
 
   const baseStyle = `
     font-semibold
@@ -28,11 +29,12 @@ function ButtonComponent({ label, onClick, disabled = false, variant = 'containe
     contained: `
       bg-red-600 
       text-white
-      active:bg-red-800
       shadow-md 
       hover:shadow-lg 
       transform 
       hover:scale-105
+      disabled:bg-zinc-600
+      disabled:cursor-not-allowed
     `,
     outlined: `
       border
@@ -48,7 +50,7 @@ function ButtonComponent({ label, onClick, disabled = false, variant = 'containe
   return (
     <button
       onClick={onClick}
-      className={`${baseStyle} ${buttonStyle[variant]}`}
+      className={`${baseStyle} ${buttonStyle[variant]} ${className}`}
       disabled={disabled}
     >
       {label}

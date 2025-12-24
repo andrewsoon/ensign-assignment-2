@@ -1,7 +1,7 @@
 // context/ProductsContext.tsx
 "use client";
 
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 
 export interface Product {
   id: number;
@@ -18,6 +18,7 @@ export interface Product {
 
 type ProductsContextType = {
   products: Product[] | null;
+  categories: string[]
   loading: boolean;
   error: string | null;
 };
@@ -46,8 +47,17 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
       .finally(() => setLoading(false));
   }, []);
 
+  const categories = useMemo(() => {
+    if (!products) return []
+
+    const uniqueCategories = new Set<string>()
+    products.forEach((item) => uniqueCategories.add(item.category))
+
+    return Array.from(uniqueCategories)
+  }, [products])
+
   return (
-    <ProductsContext.Provider value={{ products, loading, error }}>
+    <ProductsContext.Provider value={{ products, categories, loading, error }}>
       {children}
     </ProductsContext.Provider>
   );

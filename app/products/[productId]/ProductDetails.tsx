@@ -1,6 +1,7 @@
 "use client"
 
 import Button from "@/components/Button"
+import Dialog from "@/components/Dialog"
 import QuantityControl from "@/components/QuantityControl"
 import { useCart } from "@/context/CartContext"
 import { useProducts } from "@/context/ProductsContext"
@@ -16,6 +17,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
   const { products, loading } = useProducts()
   const { cart, addToCart } = useCart()
   const [quantity, setQuantity] = React.useState<number>(1)
+  const [openDialog, setOpenDialog] = React.useState<boolean>(false)
   const router = useRouter()
 
   const product = React.useMemo(() => {
@@ -25,8 +27,9 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
 
   const handleAddToCart = useCallback(() => {
     if (!product) return
-    addToCart(product)
-  }, [addToCart, product])
+    addToCart(product, quantity)
+    setOpenDialog(false)
+  }, [addToCart, product, quantity])
 
   const handleIncrease = useCallback(() => {
     setQuantity((prev) => prev + 1)
@@ -54,8 +57,9 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
       flex flex-col md:flex-row items-center gap-12 
       p-10
       w-full
+      justify-center
       ">
-        <Image width={400} height={400} src={product.image} alt={`${product.title}-image`} className="w-full md:w-7/12 object-contain" />
+        <Image width={400} height={400} src={product.image} alt={`${product.title}-image`} className="w-5/12 md:w-4/12 h-auto object-contain" />
         <div className="flex flex-col gap-6 md:w-5/12">
           <p className="text-5xl">{product.title}</p>
           <p className="text-zinc-600 text-xl">{product.description}</p>
@@ -69,8 +73,11 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
             handleDecrease={handleDecrease}
             quantity={quantity}
           />
-          <Button label="Add to cart" onClick={handleAddToCart} />
+          <Button label="Add to cart" onClick={() => setOpenDialog(true)} />
           <Button label={`View Cart (${cartQuantity})`} variant="outlined" onClick={() => router.push("/cart")} />
+          <Dialog title="Confirmation" open={openDialog} onClose={() => setOpenDialog(false)} onSubmit={handleAddToCart}>
+            <p className="text-lg">Add {quantity}x<span className="font-semibold">&quot;{product.title}&ldquo; </span>to cart?</p>
+          </Dialog>
         </div>
       </section>
     </main>

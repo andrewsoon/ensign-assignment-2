@@ -1,5 +1,5 @@
 "use client";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import { Product } from "./ProductsContext";
 
 interface CartItem extends Product {
@@ -8,7 +8,9 @@ interface CartItem extends Product {
 
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
+  totalPrice: number;
+  totalQuantity: number;
+  addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
 };
@@ -34,12 +36,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, quantity?: number) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
         return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + (quantity ?? 1) } : item
         );
       }
       return [...prev, { ...product, quantity: 1 }];
@@ -56,8 +58,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
+
+  const { totalPrice, totalQuantity } = useMemo(() => {
+    return cart.reduce(
+      (acc, item) => {
+        acc.totalPrice += item.price * item.quantity
+        acc.totalQuantity += item.quantity
+        return acc
+      },
+      { totalPrice: 0, totalQuantity: 0 }
+    )
+  }, [cart])
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
+    <CartContext.Provider value={{ cart, totalPrice, totalQuantity, addToCart, removeFromCart, updateQuantity }}>
       {children}
     </CartContext.Provider>
   );
