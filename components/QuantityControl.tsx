@@ -11,15 +11,15 @@ function QuantityControlComponent({ quantity, handleDecrease, handleIncrease }: 
     <div className="flex items-center gap-2 bg-zinc-100 w-max">
       <button
         onClick={handleDecrease}
-        className="px-2 py-1 bg-zinc-200 rounded hover:bg-zinc-300 cursor-pointer disabled:cursor-not-allowed"
+        className="text-xs md:text-base px-2 py-1 bg-zinc-200 rounded hover:bg-zinc-300 cursor-pointer disabled:cursor-not-allowed"
         disabled={quantity <= 1}
       >
         -
       </button>
-      <span className="px-2">{quantity}</span>
+      <span className="text-xs md:text-base px-2">{quantity}</span>
       <button
         onClick={handleIncrease}
-        className="px-2 py-1 bg-zinc-200 rounded hover:bg-zinc-300 cursor-pointer"
+        className="text-xs md:text-base px-2 py-1 bg-zinc-200 rounded hover:bg-zinc-300 cursor-pointer"
       >
         +
       </button>

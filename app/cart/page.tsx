@@ -19,7 +19,7 @@ export default function Cart() {
   }
 
   return (
-    <main className="p-10 max-w-7xl w-full mx-auto">
+    <main className="p-5 md:p-10 max-w-7xl w-full mx-auto">
       <h1 className="text-4xl font-bold mb-8 text-left">Shopping Cart</h1>
 
       <div className="flex flex-col md:flex-row gap-2 sm:gap-6">
@@ -55,12 +55,12 @@ export default function Cart() {
                 </Link>
 
                 <div className="w-full flex-1 flex flex-col gap-1 sm:gap-2">
-                  <h2 className="text-2xl font-semibold">{item.title}</h2>
-                  <p className="text-lg text-gray-800 font-medium">${item.price}</p>
+                  <h2 className="text-base md:text-2xl font-semibold line-clamp-2">{item.title}</h2>
+                  <p className="text-sm md:text-lg text-gray-800 font-medium">${item.price}</p>
                   <div className="flex flex-row justify-between items-center">
 
                     <div className="flex flex-row flex-wrap items-center gap-1 sm:gap-2">
-                      <p className="text-base font-semibold">Quantity</p>
+                      <p className="text-sm md:text-base font-semibold">Quantity</p>
                       <QuantityControl
                         handleDecrease={() => updateQuantity(item.id, item.quantity - 1)}
                         handleIncrease={() => updateQuantity(item.id, item.quantity + 1)}
