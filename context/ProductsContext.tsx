@@ -37,15 +37,30 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch products");
-        return res.json();
-      })
-      .then((data: Product[]) => setProducts(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const res = await fetch("https://fakestoreapi.com/products");
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const data: Product[] = await res.json();
+        setProducts(data);
+      } catch (err) {
+        setProducts([]); // fallback to empty array
+        setError(err instanceof Error ? err.message : "Unknown error");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
+
 
   const categories = useMemo(() => {
     if (!products) return []

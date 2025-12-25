@@ -8,7 +8,6 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-40 border-b border-zinc-200 bg-zinc-50/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Brand */}
         <Link
           href="/"
           className="text-lg font-semibold tracking-tight text-zinc-900 hover:text-zinc-700"
@@ -16,7 +15,6 @@ export default function Navbar() {
           EnsignRetail
         </Link>
 
-        {/* Actions */}
         <div className="flex items-center gap-2">
           <p>${totalPrice.toFixed(2)}</p>
           <Link

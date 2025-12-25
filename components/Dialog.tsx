@@ -18,7 +18,7 @@ export default function Dialog({ open, onClose, onSubmit, title, children }: Dia
         onClick={onClose}
       />
 
-      <div className="relative z-10 w-full max-w-md rounded-xl bg-zinc-50 p-6 shadow-xl">
+      <div className="relative z-10 w-full max-w-md rounded-xl bg-zinc-50 p-6 shadow-xl mx-5">
         {title && (
           <h2 className="mb-4 text-lg font-semibold text-zinc-900">
             {title}

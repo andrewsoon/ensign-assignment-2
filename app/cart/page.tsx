@@ -1,4 +1,5 @@
 "use client"
+import BackButton from "@/components/BackButton";
 import Button from "@/components/Button";
 import Dialog from "@/components/Dialog";
 import QuantityControl from "@/components/QuantityControl";
@@ -6,24 +7,23 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { useState } from "react";
 
 export default function Cart() {
   const router = useRouter()
   const { cart, totalPrice, totalQuantity, updateQuantity, removeFromCart } = useCart()
-  const [openDialog, setOpenDialog] = React.useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
 
   const handleCheckout = () => {
-    // void function to handle checkout
-    return
+    alert("Checked out cart!")
   }
 
   return (
-    <main className="p-5 md:p-10 max-w-7xl w-full mx-auto">
-      <h1 className="text-4xl font-bold mb-8 text-left">Shopping Cart</h1>
-
-      <div className="flex flex-col md:flex-row gap-2 sm:gap-6">
-        <div className="w-full md:w-7/12 flex flex-col gap-4 md:gap-6">
+    <main className="p-5 max-w-7xl w-full mx-auto">
+      <BackButton />
+      <h1 className="text-lg sm:text-2xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8 text-left">Shopping Cart</h1>
+      <div className="flex flex-col lg:flex-row gap-2 sm:gap-6">
+        <div className="w-full lg:w-7/12 flex flex-col gap-4 lg:gap-6">
           {cart.length === 0
             ? <div className="flex flex-col py-20 gap-4">
               <p className="text-xl text-zinc-600">
@@ -50,12 +50,12 @@ export default function Cart() {
                     height={100}
                     src={item.image}
                     alt={item.title}
-                    className="h-full w-auto object-contain rounded"
+                    className="h-auto w-16 sm:w-24 md:w-32 lg:w-full object-contain rounded"
                   />
                 </Link>
 
                 <div className="w-full flex-1 flex flex-col gap-1 sm:gap-2">
-                  <h2 className="text-base md:text-2xl font-semibold line-clamp-2">{item.title}</h2>
+                  <p className="text-base md:text-2xl font-semibold line-clamp-2">{item.title}</p>
                   <p className="text-sm md:text-lg text-gray-800 font-medium">${item.price}</p>
                   <div className="flex flex-row justify-between items-center">
 
@@ -98,7 +98,7 @@ export default function Cart() {
             ))}
         </div>
         <div className="
-          w-full md:w-5/12 min:min-w-100 
+          w-full lg:w-5/12 min:min-w-100 
           flex flex-col
           gap-4
         ">
@@ -110,6 +110,16 @@ export default function Cart() {
             shadow-sm
           ">
             <p className="text-zinc-800 text-2xl font-semibold">Order Summary | {totalQuantity} Item(s)</p>
+            <div className="p-2">
+              {cart.map((item) => {
+                return (
+                  <div key={item.id} className="flex flex-row items-center justify-between gap-6">
+                    <p className="line-clamp-1">{item.quantity}x {item.title}</p>
+                    <p>${(item.price * item.quantity).toFixed(2)}</p>
+                  </div>
+                )
+              })}
+            </div>
             <p className="text-xl font-bold">
               Total: ${totalPrice.toFixed(2)}
             </p>
