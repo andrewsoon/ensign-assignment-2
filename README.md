@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 EnsignRetail – Shopping Cart Application
 
-## Getting Started
+EnsignRetail is a modern shopping cart application built with **React / Next.js**, powered by the **Fake Store API**.  
+This project was completed as part of a frontend assignment and demonstrates routing, state management, persistence, and UI design.
 
-First, run the development server:
+---
+
+## 📌 Features
+
+### 🏠 Main Page
+
+- Displays a list of products fetched from the Fake Store API
+- Supports:
+  - 🔍 Search
+  - 🗂️ Category filtering
+  - 🔃 Sorting
+- Clicking a product navigates to the **Product Detail Page**
+
+---
+
+### 📄 Product Detail Page
+
+- Displays detailed product information
+- Allows users to:
+  - Select quantity
+  - Add products to cart
+- Cart quantity updates immediately
+- Includes navigation back to the previous page
+
+---
+
+### 🛍️ Cart Page
+
+- Lists all products added to the cart
+- Allows:
+  - Quantity updates
+  - Removal of products
+- Displays:
+  - Item-level subtotal
+  - Total quantity
+  - Total amount payable
+- Includes an **Order Summary** section aggregating all totals
+
+---
+
+## 💾 Persistence
+
+- Cart data is persisted using **localStorage**
+- Cart state is restored when the browser is closed and reopened
+
+---
+
+## ⚙️ Technical Details
+
+- **Framework**: React / Next.js (App Router)
+- **State Management**:
+  - React Context API
+  - Chosen for simplicity and suitability for a small-to-medium scale application
+- **Styling**: Tailwind CSS
+- **Data Source**:
+  - [https://fakestoreapi.com](https://fakestoreapi.com)
+
+---
+
+## 🎨 UI & Assets
+
+- Responsive UI optimized for desktop and mobile screens
+- Icons and SVGs are sourced from:
+  👉 **https://heroicons.com/**
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+# Install dependencies
+npm install
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Possible Improvements
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Implement automated tests for cart functionality (e.g., quantity updates, total price calculation)
+- Add a complete checkout flow with order confirmation
+- Improve accessibility (ARIA roles, keyboard navigation)
+- Add subtle animations for cart interactions to enhance UX
+- Introduce user authentication for personalized carts and order history
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---

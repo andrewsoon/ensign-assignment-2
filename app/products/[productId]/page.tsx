@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { use } from "react";
 import ProductDetails from "./ProductDetails";
 
@@ -6,6 +7,10 @@ type Props = {
     productId: string;
   }>;
 };
+
+export const metadata: Metadata = {
+  title: "Product Details",
+}
 
 export default function ProductDetailPage({ params }: Props) {
 

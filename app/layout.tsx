@@ -12,8 +12,15 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "EnsignRetail",
-  description: "Retail store built from fakeapi",
+  title: {
+    default: "EnsignRetail",
+    template: "%s | EnsignRetail",
+  },
+  description: "A retail store built with Next.js and Fake Store API",
+  applicationName: "EnsignRetail",
+  keywords: ["ecommerce", "react", "nextjs", "shopping cart"],
+  authors: [{ name: "EnsignRetail" }],
+  creator: "EnsignRetail",
 };
 
 export default async function RootLayout({
