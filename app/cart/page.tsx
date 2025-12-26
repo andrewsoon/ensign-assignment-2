@@ -4,15 +4,10 @@ import Button from "@/components/Button";
 import Dialog from "@/components/Dialog";
 import QuantityControl from "@/components/QuantityControl";
 import { useCart } from "@/context/CartContext";
-import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-export const metadata: Metadata = {
-  title: "Cart",
-}
 
 export default function Cart() {
   const router = useRouter()

@@ -182,7 +182,7 @@ export default function HomePage() {
                     rounded-xl
                     shadow-sm
                     hover:shadow-lg
-                    hover:scale-105
+                    hover:scale-101
                     transition-transform transition-shadow duration-300 ease-in-out
                     cursor-pointer
                     flex flex-col items-center 
