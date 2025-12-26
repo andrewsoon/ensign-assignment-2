@@ -1,4 +1,4 @@
-# 🛒 EnsignRetail – Shopping Cart Application
+# 🛒 Assignment 2 – Shopping Cart (React)
 
 EnsignRetail is a modern shopping cart application built with **React / Next.js**, powered by the **Fake Store API**.  
 This project was completed as part of a frontend assignment and demonstrates routing, state management, persistence, and UI design.
