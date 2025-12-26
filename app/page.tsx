@@ -18,9 +18,11 @@ export default function HomePage() {
   const filteredProducts = useMemo(() => {
     if (!products) return null
 
+    let filteredProducts = products
+
     const query = debouncedSearch.trim().toLowerCase()
     if (query) {
-      return products.filter((item) => {
+      filteredProducts = filteredProducts.filter((item) => {
         const searchableFields = [item.title, item.description, item.category]
         return searchableFields.some((field) =>
           field.toLowerCase().includes(query)
@@ -29,10 +31,10 @@ export default function HomePage() {
     }
 
     if (category !== "all") {
-      return products.filter((item) => item.category.toLowerCase() === category.toLowerCase())
+      filteredProducts = filteredProducts.filter((item) => item.category.toLowerCase() === category.toLowerCase())
     }
 
-    return products
+    return filteredProducts
   }, [products, debouncedSearch, category])
 
   const sortedProducts = useMemo(() => {
@@ -162,6 +164,22 @@ export default function HomePage() {
                 </select>
               </div>
             </div>
+
+            <button
+              onClick={() => {
+                setCategory('all')
+                setSort('price')
+                setSortDir('asc')
+              }}
+              className="rounded-full flex items-center gap-2 rounded-full py-2 px-2 text-sm cursor-pointer ring-1
+            ring-zinc-300
+            focus:outline-none"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3 md:size-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+
+            </button>
           </div>
 
           <SearchBar placeholder="Search products .." value={searchInput} onChange={(value) => setSearchInput(value)} />
