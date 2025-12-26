@@ -1,13 +1,7 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import ProductDetails from "../ProductDetails";
-import { useCart } from "@/context/CartContext";
 import { useProducts } from "@/context/ProductsContext";
-
-// Mock next/image
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: (props: any) => <img {...props} />,
-}));
+import { fireEvent, render, screen } from "@testing-library/react";
+import { useCart } from "../../../../context/CartContext";
+import ProductDetails from "../ProductDetails";
 
 // Mock Next.js router
 const mockPush = jest.fn();

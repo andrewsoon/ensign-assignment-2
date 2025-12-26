@@ -2,12 +2,6 @@ import { CartContext } from "@/context/CartContext";
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import Cart from "../page";
 
-// Mock next/image
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: (props: any) => <img {...props} />,
-}));
-
 // Mock next/navigation
 jest.mock("next/navigation", () => ({
   useRouter: () => ({

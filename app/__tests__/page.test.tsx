@@ -1,14 +1,8 @@
+import { ProductsContext } from "@/context/ProductsContext";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import HomePage from "../page";
-import { ProductsContext } from "@/context/ProductsContext";
 
 jest.useFakeTimers();
-
-// Mock next/image
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: (props: any) => <img {...props} />,
-}));
 
 const mockProducts = [
   { id: 1, title: "Apple iPhone", price: 999, image: "/img1.png", description: "Smartphone", category: "electronics", rating: { rate: 4.5, count: 100 } },
