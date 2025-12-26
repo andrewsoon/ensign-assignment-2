@@ -104,6 +104,10 @@ This project was completed as part of a frontend assignment and demonstrates rou
 ## 🚀 Getting Started
 
 ```bash
+# Clone the repository
+git clone https://github.com/andrewsoon/ensign-assignment-2.git
+cd ensign-assignment-2
+
 # Install dependencies
 npm install
 
