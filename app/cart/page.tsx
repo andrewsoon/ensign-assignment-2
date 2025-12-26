@@ -7,16 +7,21 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function Cart() {
   const router = useRouter()
   const { cart, totalPrice, totalQuantity, updateQuantity, removeFromCart } = useCart()
-  const [openDialog, setOpenDialog] = useState(false)
+  const [removeItemId, setRemoveItemId] = useState<number | null>(null)
 
   const handleCheckout = () => {
     alert("Checked out cart!")
   }
+
+  const itemToBeRemoved = useMemo(() => {
+    if (removeItemId === null) return null
+    return cart.find((item) => item.id === removeItemId)
+  }, [cart, removeItemId])
 
   return (
     <main className="p-5 max-w-7xl w-full mx-auto">
@@ -73,30 +78,33 @@ export default function Cart() {
 
                 <div className="absolute top-4 right-4">
                   <button
-                    onClick={() => setOpenDialog(true)}
+                    onClick={() => setRemoveItemId(item.id)}
+                    aria-label={`Remove ${item.title}`}
                     className="text-zinc-600 hover:text-zinc-500 mt-2 md:mt-0 cursor-pointer"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                   </button>
-                  <Dialog
-                    open={openDialog}
-                    onClose={() => setOpenDialog(false)}
-                    title="Remove Item"
-                    onSubmit={() => {
-                      removeFromCart(item.id)
-                      setOpenDialog(false)
-                    }}
-                  >
-                    <div>
-                      <p className="text-lg">Confirm remove <span className="font-semibold">&quot;{item.title}&ldquo;</span> from cart?</p>
-                    </div>
-                  </Dialog>
                 </div>
               </div>
             ))}
         </div>
+        {itemToBeRemoved && (
+          <Dialog
+            open={itemToBeRemoved.id === removeItemId}
+            onClose={() => setRemoveItemId(null)}
+            title={`Confirm remove "${itemToBeRemoved.title}"`}
+            onSubmit={() => {
+              removeFromCart(itemToBeRemoved.id)
+              setRemoveItemId(null)
+            }}
+          >
+            <div>
+              <p className="text-lg">Confirm remove <span className="font-semibold">&quot;{itemToBeRemoved.title}&ldquo;</span> from cart?</p>
+            </div>
+          </Dialog>
+        )}
         <div className="
           w-full lg:w-5/12 min:min-w-100 
           flex flex-col

@@ -20,7 +20,7 @@ type CartContextType = {
   updateQuantity: (productId: number, quantity: number) => void;
 };
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const useCart = () => {
   const ctx = useContext(CartContext);

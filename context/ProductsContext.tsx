@@ -23,7 +23,7 @@ type ProductsContextType = {
   error: string | null;
 };
 
-const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
+export const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
 
 export const useProducts = () => {
   const ctx = useContext(ProductsContext);

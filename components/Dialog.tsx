@@ -18,9 +18,14 @@ export default function Dialog({ open, onClose, onSubmit, title, children }: Dia
         onClick={onClose}
       />
 
-      <div className="relative z-10 w-full max-w-md rounded-xl bg-zinc-50 p-6 shadow-xl mx-5">
+      <div
+        className="relative z-10 w-full max-w-md rounded-xl bg-zinc-50 p-6 shadow-xl mx-5"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dialog-title"
+      >
         {title && (
-          <h2 className="mb-4 text-lg font-semibold text-zinc-900">
+          <h2 id="dialog-title" className="mb-4 text-lg font-semibold text-zinc-900">
             {title}
           </h2>
         )}
@@ -32,12 +37,14 @@ export default function Dialog({ open, onClose, onSubmit, title, children }: Dia
         <div className="mt-6 flex justify-end gap-2">
           <button
             onClick={onClose}
+            role="button"
             className="rounded-md px-4 py-2 text-sm text-zinc-800 hover:bg-zinc-100 cursor-pointer"
           >
             Cancel
           </button>
           <button
             onClick={onSubmit}
+            role="button"
             className="rounded-md bg-zinc-800 px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer"
           >
             Confirm
