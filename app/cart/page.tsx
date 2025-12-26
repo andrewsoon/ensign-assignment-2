@@ -60,7 +60,7 @@ export default function Cart() {
                 </Link>
 
                 <div className="w-full flex-1 flex flex-col gap-1 sm:gap-2">
-                  <p className="text-base md:text-2xl font-semibold line-clamp-2">{item.title}</p>
+                  <p className="text-base sm:text-xl lg:text-2xl font-semibold line-clamp-2">{item.title}</p>
                   <p className="text-sm md:text-lg text-gray-800 font-medium">${item.price}</p>
                   <div className="flex flex-row justify-between items-center">
 
@@ -117,7 +117,7 @@ export default function Cart() {
             rounded-lg 
             shadow-sm
           ">
-            <p className="text-zinc-800 text-2xl font-semibold">Order Summary | {totalQuantity} Item(s)</p>
+            <p className="text-zinc-800 text-lg sm:text-xl lg:text-2xl font-semibold">Order Summary | {totalQuantity} Item(s)</p>
             <div className="p-2">
               {cart.map((item) => {
                 return (
