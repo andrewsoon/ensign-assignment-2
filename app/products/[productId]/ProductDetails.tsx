@@ -74,7 +74,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
     <main className="p-5 w-full">
       <BackButton />
       <section className="
-      flex flex-col md:flex-row items-center gap-4 md:gap-10 lg:gap-12 
+      flex flex-col md:flex-row items-center gap-4 md:gap-8 lg:gap-12 
       p-2 md:p-10
       w-full
       justify-center
@@ -86,11 +86,13 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
           alt={`${product.title}-image`}
           className="w-5/12 md:w-5/12 lg:w-4/12 h-auto object-contain"
         />
-        <div className="flex flex-col gap-4 md:gap-6 md:w-7/12 lg:w-8/12">
-          <p className="text-3xl md:text-5xl">{product.title}</p>
-          <p className="text-zinc-600 text-base md:text-xl">{product.description}</p>
-          <p className="text-xl md:text-3xl font-semibold">${product.price}</p>
-          <p className="text-sm md:text-lg text-zinc-600">⭐ {product.rating.rate} / 5 <span className="text-sm">({product.rating.count} sold)</span></p>
+        <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 md:gap-6 md:w-7/12 lg:w-8/12">
+          <p className="text-2xl sm:text-3xl lg:text-5xl">{product.title}</p>
+          <p className="text-zinc-600 text-sm md:text-base lg:text-lg">{product.description}</p>
+          <div className="flex flex-row items-center gap-4">
+            <p className="text-xl md:text-2xl lg:text-3xl font-semibold">${product.price}</p>
+            <p className="text-sm md:text-lg text-zinc-600">⭐ {product.rating.rate} / 5 <span className="text-sm">({product.rating.count} sold)</span></p>
+          </div>
           <div className="flex flex-row items-center gap-2">
             <p>Quantity</p>
             <QuantityControl

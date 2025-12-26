@@ -1,14 +1,9 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function BackButton() {
   const router = useRouter();
-
-  const pathname = usePathname();
-
-  // Only render if not on the home page
-  if (pathname === "/") return null;
 
   return (
     <div className="flex items-center mb-4">

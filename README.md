@@ -70,6 +70,37 @@ This project was completed as part of a frontend assignment and demonstrates rou
 
 ---
 
+## 🧪 Testing
+
+- **HomePage**
+  - Renders products from context
+  - Shows loading and empty states
+  - Filters products by category
+  - Searches products by title or description
+- **Product Detail Page**
+  - Renders product details (title, description, price, rating, quantity)
+  - Handles adding items to cart via a confirmation dialog
+  - Updates cart icon with total quantity
+- **Cart Page**
+  - Renders items in the cart with quantity and subtotal
+  - Updates quantities using the QuantityControl component
+  - Removes items after confirming in the remove-item dialog
+  - Displays order summary and total price
+- `next/router` is mocked for navigation during tests
+
+---
+
+## ✨ Possible Improvements
+
+- Add end-to-end tests simulating full user flows (search → add to cart → remove → checkout)
+- Improve accessibility (ARIA roles, keyboard navigation)
+- Test responsive layouts and mobile views
+- Add subtle animations for cart interactions to enhance UX
+- Introduce user authentication for personalized carts and order history
+- Implement a complete checkout flow with order confirmation
+
+---
+
 ## 🚀 Getting Started
 
 ```bash
@@ -81,13 +112,5 @@ npm run dev
 ```
 
 Open http://localhost:3000
-
-## ✨ Possible Improvements
-
-- Implement automated tests for cart functionality (e.g., quantity updates, total price calculation)
-- Add a complete checkout flow with order confirmation
-- Improve accessibility (ARIA roles, keyboard navigation)
-- Add subtle animations for cart interactions to enhance UX
-- Introduce user authentication for personalized carts and order history
 
 ---
